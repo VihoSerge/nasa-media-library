@@ -5,11 +5,35 @@
     <link rel="icon" type="image/svg+xml" href="/nasa-logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NASA Media Library</title>
+
+    <style>
+      .app-loading {
+        align-items: center;
+        background-image: url("/starfield-bg.jpeg");
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      try {
+        if (
+          localStorage.theme === "dark" ||
+          (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch (_) {}
+    </script>
   </head>
   <body>
     <div id="root">
-      <div>
-        <img width="80" src="/nasa-logo-animate.gif" alt="Loading animation" />
+      <div class="app-loading">
+        <img width="80" src="/nasa-logo.svg" alt="Nasa Logo" />
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>

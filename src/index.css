@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-image: url("./starfield-bg.jpeg");
-  color: #fff;
+  /* background-image: url("/starfield-bg.jpeg"); */
+  /* color: #fff; */
 }
