@@ -1,0 +1,24 @@
+.react-datepicker-wrapper input {
+  @apply w-full h-[48px] rounded p-2;
+}
+
+.react-datepicker {
+  @apply shadow-lg border-2 border-gray-100;
+}
+
+.react-datepicker__header {
+  @apply bg-gray-200;
+}
+
+.react-datepicker__year-wrapper {
+  @apply grid grid-cols-3;
+}
+
+.react-datepicker__year-text {
+  @apply p-2;
+}
+
+.react-datepicker__year-text:hover,
+.react-datepicker__year-text--keyboard-selected {
+  @apply bg-primary text-white;
+}

@@ -3,9 +3,18 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/button/button";
 import Input from "../ui/input/input";
+import YearPicker from "../year-picker";
+
+const searchParams = {
+  searchText: "",
+  yearStart: null,
+  yearEnd: null
+};
 
 export default function SearchBar() {
   const [searchText, setSearchText] = useState("");
+  const [startDate, setStartDate] = useState<Date | null>();
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,23 +38,44 @@ export default function SearchBar() {
 
     const params = getParams(location.search);
 
-    const urlParams = buildParams({ ...params, q: searchText });
+    const urlParams = buildParams({
+      ...params,
+      q: searchText,
+      year_start: startDate.getFullYear().toString(),
+      year_end: endDate.getFullYear().toString()
+    });
 
     navigate(`/search/${urlParams}`);
   };
 
-  return (
-    <div className="flex flex-col md:flex-row gap-4 p-4 dark:bg-[#23232c] w-full md:w-1/3 rounded-md  ">
-      <Input
-        className="flex-1"
-        inputClassName="!dark:bg-[#17181c] dark:border-0"
-        name="search"
-        placeholder="Enter your search"
-        onChange={handleChange}
-        value={searchText}
-      />
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
 
-      <Button className="bg-black text-white" onClick={handleSearch}>
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+
+  return (
+    <div className="flex flex-col md:flex-row gap-4 p-4 dark:bg-[#23232c] w-full lg:w-1/2 rounded-md  ">
+      <div className="grid  grid-cols-1 md:grid-cols-3 gap-2">
+        <Input
+          className="flex-1"
+          inputClassName="!dark:bg-[#17181c] dark:border-0"
+          name="search"
+          placeholder="Enter your search"
+          onChange={handleChange}
+          value={searchText}
+        />
+        <div>
+          <YearPicker data-key="yearStart" maxDate={endDate} selected={startDate} onChange={handleStartDateChange} />
+        </div>
+        <div>
+          <YearPicker data-key="yearEnd" minDate={startDate} selected={endDate} onChange={handleEndDateChange} />
+        </div>
+      </div>
+
+      <Button className="bg-primary text-white" onClick={handleSearch}>
         Search
       </Button>
     </div>
