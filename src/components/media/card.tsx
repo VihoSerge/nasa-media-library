@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 interface MediaCardProps {
   item: Media;
 }
+
 export default function MediaCard({ item }: MediaCardProps) {
   const { image, title, location, photographer } = item;
   return (

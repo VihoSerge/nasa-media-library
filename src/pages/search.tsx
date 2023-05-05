@@ -1,4 +1,5 @@
 import { useSearch } from "@/api";
+import CardListLoader from "@/components/loader/card-list";
 import MediaList from "@/components/media/list";
 import QueryResult from "@/components/query-result";
 import SearchBar from "@/components/search-bar";
@@ -20,7 +21,7 @@ export default function SearchPage() {
         <SearchBar />
       </div>
 
-      <QueryResult loading={isLoading} error={error} data={data}>
+      <QueryResult loading={isLoading} loader={<CardListLoader />} error={error} data={data?.pages}>
         <MediaList data={data?.pages.map(({ items }) => items).flat() || []} />
 
         {hasNextPage && (

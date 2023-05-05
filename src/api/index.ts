@@ -2,7 +2,7 @@ import { API_ENDPOINTS } from "@/constants";
 import { isObjectEmpty } from "@/utils";
 import { HttpClient } from "@/utils/http-client";
 import { getParams } from "@/utils/url";
-import { useInfiniteQuery, useQueries, useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 
 const mediaKeys = ["Title", "Location", "Description", "Photographer", "Keywords", "DateCreated", "Image"];
 const prefix = "AVAIL";
