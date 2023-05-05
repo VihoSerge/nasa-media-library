@@ -1,3 +1,7 @@
+import { MediaDetails } from "@/containers/media/details";
+import { useParams } from "react-router-dom";
+
 export default function ShowPage() {
-  return <div>Show page</div>;
+  const { nasaId } = useParams();
+  return <MediaDetails id={nasaId} />;
 }

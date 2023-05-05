@@ -5,4 +5,5 @@
 body {
   /* background-image: url("/starfield-bg.jpeg"); */
   /* color: #fff; */
+  word-break: break-all;
 }
