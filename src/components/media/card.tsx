@@ -10,7 +10,7 @@ export default function MediaCard({ item }: MediaCardProps) {
   const { image, title, location, photographer } = item;
   return (
     <div className="w-full p-1 space-y-2 border border-gray-100 shadow-lg rounded-xl">
-      <Link to={`/show/${encodeURI(item.id)}`}>
+      <Link to={`/show/${item.id}`}>
         <div className="h-[240px] rounded-xl overflow-hidden">
           <img
             src={image}

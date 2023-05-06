@@ -62,7 +62,10 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="flex flex-col w-full gap-4 p-4 bg-gray-200 rounded-md md:flex-row lg:w-1/2 ">
+    <div
+      data-testid="search-bar"
+      className="flex flex-col w-full gap-4 p-4 bg-gray-200 rounded-md md:flex-row lg:w-1/2 "
+    >
       <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-3">
         <Input
           className="flex-1"

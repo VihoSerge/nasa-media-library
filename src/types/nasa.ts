@@ -3,12 +3,12 @@ interface Metadata {
 }
 
 interface SearchItemData {
-  nasa_id: string;
-  title: string;
-  keywords: string[];
-  photographer: string;
-  description: string;
-  location: string;
+  nasa_id?: string;
+  title?: string;
+  keywords?: string[];
+  photographer?: string;
+  description?: string;
+  location?: string;
 }
 
 interface Link {
@@ -22,11 +22,11 @@ export interface SearchItem {
 }
 
 export interface SearchCollection {
-  href: string;
-  items: SearchItem[];
-  links: any[];
-  metadata: Metadata;
-  version: string;
+  href?: string;
+  items?: SearchItem[];
+  links?: any[];
+  metadata?: Metadata;
+  version?: string;
 }
 
 export interface SearchAPIParams {
