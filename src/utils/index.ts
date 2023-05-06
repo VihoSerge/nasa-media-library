@@ -4,7 +4,8 @@ export const isObjectEmpty = (obj) => {
 
 export const formatDate = (dateStr: string) => {
   try {
-    const date = new Date(dateStr);
+    const strSplit = dateStr.split(" ");
+    const date = new Date(strSplit.length > 2 ? dateStr : strSplit[0]);
 
     return new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(date);
   } catch (error) {

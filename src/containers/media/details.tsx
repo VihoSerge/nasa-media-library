@@ -73,10 +73,7 @@ export function MediaDetails({ id }: MediaDetailsProps): JSX.Element {
 
             <div className="flex flex-wrap gap-3 font-light">
               {metadata?.datecreated && (
-                <Info
-                  icon={<CalendarDaysIcon className="w-5 h-5" />}
-                  info={formatDate(metadata?.datecreated.split(" ")[0])}
-                />
+                <Info icon={<CalendarDaysIcon className="w-5 h-5" />} info={formatDate(metadata?.datecreated)} />
               )}
               {metadata?.location && <Info icon={<MapPinIcon className="w-5 h-5" />} info={metadata?.location} />}
             </div>
