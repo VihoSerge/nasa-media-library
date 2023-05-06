@@ -11,7 +11,7 @@ interface MediaDetailsProps {
   id: string;
 }
 function Title({ title }: { title: string }) {
-  return <span className="font-bold text-2xl">{title}</span>;
+  return <span className="text-2xl font-bold">{title}</span>;
 }
 
 function Description({ description }: { description: string }) {
@@ -24,7 +24,7 @@ function Photographer({ metadata }: { metadata: Media }) {
 
 function Info({ info, icon }: { info: string; icon: ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-1 text-sm text-gray-500">
+    <div className="inline-flex items-center text-sm text-gray-500 gap-1">
       {icon}
       <span>{info}</span>
     </div>
@@ -48,7 +48,7 @@ function Keywords({ metadata }: { metadata: Media }) {
   return (
     <div className="flex flex-wrap  gap-2">
       {metadata?.keywords?.map((keyword) => (
-        <span key={keyword} className="p-2 bg-gray-100 inline-block rounded-md">
+        <span key={keyword} className="inline-block p-2 bg-gray-100 rounded-md">
           {keyword}
         </span>
       ))}
@@ -62,45 +62,42 @@ export function MediaDetails({ id }: MediaDetailsProps): JSX.Element {
 
   return (
     <QueryResult loading={isMetadataLoading} loader={<DetailsLoader />} error={error} data={metadata}>
-      <div className="space-y-5">
-        <BackButton />
-        <div>
-          <div className="md:h-[450px]">
-            <img src={image} alt="" className="w-full h-full object-cover rounded-3xl" />
-          </div>
-          <div className="py-4 grid md:grid-cols-[70%_auto] gap-10">
-            <div className="space-y-3">
-              <div>
-                <Title title={metadata?.title} />
-              </div>
-
-              <div className="flex flex-wrap gap-3 font-light">
-                {metadata?.datecreated && (
-                  <Info
-                    icon={<CalendarDaysIcon className="w-5 h-5" />}
-                    info={formatDate(metadata?.datecreated.split(" ")[0])}
-                  />
-                )}
-                {metadata?.location && <Info icon={<MapPinIcon className="w-5 h-5" />} info={metadata?.location} />}
-              </div>
-
-              <Description description={metadata?.description} />
+      <div>
+        <div className="md:h-[450px]">
+          <img src={image} alt="" className="object-cover w-full h-full rounded-3xl" />
+        </div>
+        <div className="py-4 grid md:grid-cols-[70%_auto] gap-10">
+          <div className="space-y-3">
+            <div>
+              <Title title={metadata?.title} />
             </div>
-            <aside>
-              <div className="shadow-lg rounded-xl border-2 border-gray-200 p-4 space-y-4">
-                {metadata &&
-                  rightInfos.map(
-                    (info) =>
-                      metadata[info.key] && (
-                        <div key={info.key} className="space-y-1">
-                          <span className="text-sm text-gray-500">{info.label}</span>
-                          {React.createElement(info.element, { metadata })}
-                        </div>
-                      )
-                  )}
-              </div>
-            </aside>
+
+            <div className="flex flex-wrap font-light gap-3">
+              {metadata?.datecreated && (
+                <Info
+                  icon={<CalendarDaysIcon className="w-5 h-5" />}
+                  info={formatDate(metadata?.datecreated.split(" ")[0])}
+                />
+              )}
+              {metadata?.location && <Info icon={<MapPinIcon className="w-5 h-5" />} info={metadata?.location} />}
+            </div>
+
+            <Description description={metadata?.description} />
           </div>
+          <aside>
+            <div className="p-4 border-2 border-gray-200 shadow-lg rounded-xl space-y-4">
+              {metadata &&
+                rightInfos.map(
+                  (info) =>
+                    metadata[info.key] && (
+                      <div key={info.key} className="space-y-1">
+                        <span className="text-sm text-gray-500">{info.label}</span>
+                        {React.createElement(info.element, { metadata })}
+                      </div>
+                    )
+                )}
+            </div>
+          </aside>
         </div>
       </div>
     </QueryResult>

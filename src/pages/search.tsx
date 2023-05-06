@@ -17,7 +17,7 @@ export default function SearchPage() {
 
   return (
     <div className="flex flex-col items-center min-h-screen gap-8">
-      <div className="bg-gray-100 w-full p-4 md:py-16 rounded-xl flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center w-full p-4 bg-gray-100 md:py-16 rounded-xl">
         <SearchBar />
       </div>
 
@@ -28,7 +28,7 @@ export default function SearchPage() {
           <Button
             loading={isFetchingNextPage}
             disabled={!hasNextPage || isFetchingNextPage}
-            className="bg-black text-white"
+            className="text-white bg-black"
             onClick={handleLoadMore}
           >
             Load More

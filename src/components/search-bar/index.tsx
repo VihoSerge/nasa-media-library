@@ -1,5 +1,5 @@
 import { buildParams, getParams } from "@/utils/url";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/button/button";
 import Input from "../ui/input/input";
@@ -21,9 +21,9 @@ export default function SearchBar() {
     }
   }, [location]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
-  };
+  }, []);
 
   const handleSearch = () => {
     if (!searchText.length) {
@@ -51,11 +51,11 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 p-4 bg-gray-200 dark:bg-[#23232c] w-full lg:w-1/2 rounded-md  ">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 w-full">
+    <div className="flex flex-col w-full gap-4 p-4 bg-gray-200 rounded-md md:flex-row lg:w-1/2 ">
+      <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-3">
         <Input
           className="flex-1"
-          inputClassName="!dark:bg-[#17181c] dark:border-0"
+          inputClassName="bg-white"
           name="search"
           placeholder="Enter your search"
           onChange={handleChange}
@@ -81,7 +81,7 @@ export default function SearchBar() {
         </div>
       </div>
 
-      <Button className="bg-primary text-white" onClick={handleSearch}>
+      <Button className="text-white bg-primary" onClick={handleSearch}>
         Search
       </Button>
     </div>

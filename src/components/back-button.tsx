@@ -10,7 +10,7 @@ export default function BackButton() {
   };
 
   return (
-    <Button onClick={handleBack} className="bg-white shadow-sm border border-gray-300 gap-2">
+    <Button onClick={handleBack} className="bg-white border border-gray-300 shadow-sm gap-2">
       <ArrowLeftIcon className="w-4 h-4" />
       <span className="hidden md:inline">Back</span>
     </Button>

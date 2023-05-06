@@ -17,7 +17,7 @@ const transformMedia = (item: any): Media => {
 
 export default function MediaList({ data }: MediaListProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-8 place-items-center">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-8 place-items-center">
       {data.map((item) => (
         <MediaCard key={item.id} item={transformMedia(item)} />
       ))}

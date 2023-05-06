@@ -10,7 +10,6 @@ interface QueryResultProps {
 }
 
 export default function QueryResult({ loading, loader, error, data, children }: QueryResultProps): JSX.Element {
-  console.log(data, loading);
   if (error) {
     return <p>ERROR: {error.message}</p>;
   }

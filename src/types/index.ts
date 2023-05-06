@@ -7,3 +7,9 @@ export interface Media {
   keywords?: string[];
   dateCreated?: string;
 }
+
+export interface SearchParams {
+  q: string;
+  year_start: string;
+  year_end: string;
+}

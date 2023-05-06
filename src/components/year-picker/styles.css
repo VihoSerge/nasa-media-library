@@ -1,5 +1,5 @@
 .react-datepicker-wrapper input {
-  @apply w-full h-[48px] rounded p-2;
+  @apply w-full h-[48px] rounded p-2 outline-none text-sm;
 }
 
 .react-datepicker {

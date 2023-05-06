@@ -64,7 +64,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     return (
       <div className={className}>
         {showLabel ? (
-          <label htmlFor={name} className="mb-3 block text-sm font-semibold leading-none text-body-dark">
+          <label htmlFor={name} className="block mb-3 text-sm font-semibold leading-none text-body-dark">
             {label}
           </label>
         ) : (
