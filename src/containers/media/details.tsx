@@ -1,5 +1,4 @@
 import { useDetails, useImage } from "@/api";
-import BackButton from "@/components/back-button";
 import DetailsLoader from "@/components/loader/details";
 import QueryResult from "@/components/query-result";
 import { Media } from "@/types";
@@ -24,7 +23,7 @@ function Photographer({ metadata }: { metadata: Media }) {
 
 function Info({ info, icon }: { info: string; icon: ReactNode }) {
   return (
-    <div className="inline-flex items-center text-sm text-gray-500 gap-1">
+    <div className="inline-flex items-center gap-1 text-sm text-gray-500">
       {icon}
       <span>{info}</span>
     </div>
@@ -46,7 +45,7 @@ const rightInfos = [
 
 function Keywords({ metadata }: { metadata: Media }) {
   return (
-    <div className="flex flex-wrap  gap-2">
+    <div className="flex flex-wrap gap-2">
       {metadata?.keywords?.map((keyword) => (
         <span key={keyword} className="inline-block p-2 bg-gray-100 rounded-md">
           {keyword}
@@ -72,7 +71,7 @@ export function MediaDetails({ id }: MediaDetailsProps): JSX.Element {
               <Title title={metadata?.title} />
             </div>
 
-            <div className="flex flex-wrap font-light gap-3">
+            <div className="flex flex-wrap gap-3 font-light">
               {metadata?.datecreated && (
                 <Info
                   icon={<CalendarDaysIcon className="w-5 h-5" />}
@@ -85,7 +84,7 @@ export function MediaDetails({ id }: MediaDetailsProps): JSX.Element {
             <Description description={metadata?.description} />
           </div>
           <aside>
-            <div className="p-4 border-2 border-gray-200 shadow-lg rounded-xl space-y-4">
+            <div className="p-4 space-y-4 border-2 border-gray-200 shadow-lg rounded-xl">
               {metadata &&
                 rightInfos.map(
                   (info) =>

@@ -8,7 +8,8 @@ import RootPage from "./pages";
 export const pagesRouter = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />
+    element: <HomePage />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/",
