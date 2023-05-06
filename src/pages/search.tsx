@@ -4,14 +4,14 @@ import MediaList from "@/components/media/list";
 import QueryResult from "@/components/query-result";
 import SearchBar from "@/components/search-bar";
 import Button from "@/components/ui/button/button";
-import { SearchParams } from "@/types";
-import { getParams } from "@/utils/url";
+import { SearchAPIParams } from "@/types/nasa";
+import { getUrlParams } from "@/utils/url";
 import { useLocation } from "react-router-dom";
 
 export default function SearchPage() {
   const { search } = useLocation();
   const { data, isLoading, error, hasNextPage, isFetchingNextPage, fetchNextPage } = useSearch(
-    getParams(search) as unknown as SearchParams
+    getUrlParams(search) as unknown as SearchAPIParams
   );
 
   const handleLoadMore = () => {

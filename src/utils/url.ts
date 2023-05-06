@@ -1,4 +1,4 @@
-export const buildParams = (params: Record<string, string>): string => {
+export const buildUrlParams = (params: Record<string, string>): string => {
   let param = Object.entries(params).reduce(
     (str, [key, value]) => (value ? `${str}&${key}=${encodeURIComponent(value)}` : str),
     ""
@@ -11,4 +11,4 @@ export const buildParams = (params: Record<string, string>): string => {
   return param;
 };
 
-export const getParams = (search: string) => Object.fromEntries(new URLSearchParams(search).entries());
+export const getUrlParams = (search: string) => Object.fromEntries(new URLSearchParams(search).entries());

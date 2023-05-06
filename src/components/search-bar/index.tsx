@@ -1,53 +1,64 @@
-import { buildParams, getParams } from "@/utils/url";
+import { buildUrlParams, getUrlParams } from "@/utils/url";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/button/button";
 import Input from "../ui/input/input";
 import YearPicker from "../year-picker";
+import { SearchAPIParams } from "@/types/nasa";
+
+interface SearchValues {
+  text: string;
+  yearStart: Date;
+  yearEnd: Date;
+}
+
+const defaultSearchValues: SearchValues = {
+  text: "",
+  yearStart: null,
+  yearEnd: null
+};
 
 export default function SearchBar() {
-  const [searchText, setSearchText] = useState("");
-  const [startDate, setStartDate] = useState<Date | null>();
-  const [endDate, setEndDate] = useState<Date | null>();
+  const [searchValues, setSearchValues] = useState(defaultSearchValues);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
+    const urlParams = getUrlParams(location.search) as unknown as SearchAPIParams;
 
-    if (urlParams.get("q")) {
-      setSearchText(urlParams.get("q"));
-    }
+    setSearchValues((prev) => ({
+      ...prev,
+      text: urlParams.q,
+      ...(urlParams.year_start && { yearStart: new Date(urlParams.year_start) }),
+      ...(urlParams.year_end && { yearEnd: new Date(urlParams.year_end) })
+    }));
   }, [location]);
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value);
+    setSearchValues((prev) => ({ ...prev, text: event.target.value }));
   }, []);
 
   const handleSearch = () => {
-    if (!searchText.length) {
+    if (!searchValues.text.length) {
       return;
     }
 
-    const params = getParams(location.search);
-
-    const urlParams = buildParams({
-      ...params,
-      q: searchText
-      // year_start: startDate.getFullYear().toString(),
-      // year_end: endDate.getFullYear().toString()
+    const urlParams = buildUrlParams({
+      q: searchValues.text,
+      ...(searchValues.yearStart && { year_start: searchValues.yearStart.getFullYear().toString() }),
+      ...(searchValues.yearEnd && { year_end: searchValues.yearEnd.getFullYear().toString() })
     });
 
     navigate(`/search/${urlParams}`);
   };
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
+  const handleStartDateChange = (date: Date) => {
+    setSearchValues((prev) => ({ ...prev, yearStart: date }));
   };
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
+  const handleEndDateChange = (date: Date) => {
+    setSearchValues((prev) => ({ ...prev, yearEnd: date }));
   };
 
   return (
@@ -59,13 +70,13 @@ export default function SearchBar() {
           name="search"
           placeholder="Enter your search"
           onChange={handleChange}
-          value={searchText}
+          value={searchValues.text}
         />
         <div>
           <YearPicker
             data-key="yearStart"
-            maxDate={endDate}
-            selected={startDate}
+            maxDate={searchValues.yearEnd}
+            selected={searchValues.yearStart}
             placeholderText="Filter by start year"
             onChange={handleStartDateChange}
           />
@@ -73,8 +84,8 @@ export default function SearchBar() {
         <div>
           <YearPicker
             data-key="yearEnd"
-            minDate={startDate}
-            selected={endDate}
+            minDate={searchValues.yearStart}
+            selected={searchValues.yearEnd}
             placeholderText="Filter by end year"
             onChange={handleEndDateChange}
           />

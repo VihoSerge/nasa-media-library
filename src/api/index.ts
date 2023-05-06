@@ -1,11 +1,11 @@
 import { API_ENDPOINTS } from "@/constants";
 import { isObjectEmpty } from "@/utils";
-import { getParams } from "@/utils/url";
+import { getUrlParams } from "@/utils/url";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { fetchAssets, fetchMetadata, search } from "./client";
-import { SearchParams } from "@/types";
+import { SearchAPIParams } from "@/types";
 
-export const useSearch = (searchParams: SearchParams) => {
+export const useSearch = (searchParams: SearchAPIParams) => {
   return useInfiniteQuery<any>(
     [API_ENDPOINTS.SEARCH, searchParams],
     ({ pageParam, queryKey }) => {
@@ -14,7 +14,7 @@ export const useSearch = (searchParams: SearchParams) => {
     {
       getNextPageParam: (lastPage) => {
         const foundNextLink = lastPage?.links?.find((link) => link.rel === "next");
-        return foundNextLink ? getParams(new URL(foundNextLink?.href).search) : null;
+        return foundNextLink ? getUrlParams(new URL(foundNextLink?.href).search) : null;
       },
       enabled: !isObjectEmpty(searchParams)
     }

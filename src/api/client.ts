@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/constants";
-import { SearchParams } from "@/types";
+import { SearchAPIParams } from "@/types";
 import { HttpClient } from "@/utils/http-client";
 
 const mediaKeys = ["Title", "Location", "Description", "Photographer", "Keywords", "DateCreated", "Image"];
@@ -13,7 +13,7 @@ const transformMetadata = (metadata: Record<string, any>) => {
   return mediaKeys.reduce((prev, curr) => ({ ...prev, [curr.toLowerCase()]: metadata[`${prefix}:${curr}`] }), {});
 };
 
-export const search = (searchParams: SearchParams) => {
+export const search = (searchParams: SearchAPIParams) => {
   return HttpClient.get(API_ENDPOINTS.SEARCH, searchParams).then(transformData);
 };
 

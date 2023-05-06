@@ -5,3 +5,9 @@ export interface APIResponseCollection {
   metadata: [];
   version: string;
 }
+
+export interface SearchAPIParams {
+  q: string;
+  year_start: string;
+  year_end: string;
+}
