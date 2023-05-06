@@ -3,6 +3,7 @@ import CardListLoader from "@/components/loader/card-list";
 import MediaList from "@/components/media/list";
 import QueryResult from "@/components/query-result";
 import SearchBar from "@/components/search-bar";
+import SearchResult from "@/components/search-result";
 import Button from "@/components/ui/button/button";
 import { SearchAPIParams } from "@/types/nasa";
 import { getUrlParams } from "@/utils/url";
@@ -25,7 +26,8 @@ export default function SearchPage() {
       </div>
 
       <QueryResult loading={isLoading} loader={<CardListLoader />} error={error} data={data?.pages}>
-        <MediaList data={data?.pages.map(({ items }) => items).flat() || []} />
+        <SearchResult result={data?.pages} />
+        <MediaList data={data?.pages} />
 
         {hasNextPage && (
           <Button

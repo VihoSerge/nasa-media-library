@@ -1,25 +1,35 @@
 import { Media } from "@/types";
 import MediaCard from "./card";
+import { SearchCollection, SearchItem } from "@/types/nasa";
+import React from "react";
 
 interface MediaListProps {
-  data: any[];
+  data: SearchCollection[];
 }
-const transformMedia = (item: any): Media => {
+
+const transformMedia = (item: SearchItem): Media => {
+  const [data] = item.data;
+  const [imagePath] = item.links;
+
   return {
-    id: item.data[0].nasa_id,
-    image: item.links?.[0].href,
-    title: item.data[0].title,
-    location: item.data[0].location,
-    photographer: item.data[0].photographer,
+    id: data.nasa_id,
+    image: imagePath.href,
+    title: data.title,
+    location: data.location,
+    photographer: data.photographer,
     dateCreated: ""
   };
 };
 
 export default function MediaList({ data }: MediaListProps) {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-8 place-items-center">
-      {data.map((item) => (
-        <MediaCard key={item.id} item={transformMedia(item)} />
+    <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 place-items-center">
+      {data.map((page) => (
+        <React.Fragment>
+          {page.items.map((item) => (
+            <MediaCard key={item.href} item={transformMedia(item)} />
+          ))}
+        </React.Fragment>
       ))}
     </div>
   );

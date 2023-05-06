@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface QueryResultProps {
   loading: boolean;
-  loader?: any;
+  loader?: React.ReactNode;
   error: any;
   data: unknown;
 

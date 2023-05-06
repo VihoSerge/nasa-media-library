@@ -1,8 +1,31 @@
-export interface APIResponseCollection {
+interface Metadata {
+  total_hits: number;
+}
+
+interface SearchItemData {
+  nasa_id: string;
+  title: string;
+  keywords: string[];
+  photographer: string;
+  description: string;
+  location: string;
+}
+
+interface Link {
   href: string;
-  items: any[];
+}
+
+export interface SearchItem {
+  href: string;
+  data: SearchItemData[];
+  links: Link[];
+}
+
+export interface SearchCollection {
+  href: string;
+  items: SearchItem[];
   links: any[];
-  metadata: [];
+  metadata: Metadata;
   version: string;
 }
 
