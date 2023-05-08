@@ -5,6 +5,7 @@ import Button from "../ui/button/button";
 import Input from "../ui/input/input";
 import YearPicker from "../year-picker";
 import { SearchAPIParams } from "@/types/nasa";
+import { ROUTES } from "@/constants";
 
 interface SearchValues {
   text: string;
@@ -50,7 +51,7 @@ export default function SearchBar() {
       ...(searchValues.yearEnd && { year_end: searchValues.yearEnd.getFullYear().toString() })
     });
 
-    navigate(`/search/${urlParams}`);
+    navigate(`${ROUTES.SEARCH}/${urlParams}`);
   };
 
   const handleStartDateChange = (date: Date) => {

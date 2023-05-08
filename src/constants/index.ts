@@ -5,3 +5,8 @@ export const API_ENDPOINTS = {
   ASSET: "/asset",
   METADATA: "/metadata"
 };
+
+export const ROUTES = {
+  SEARCH: "/search",
+  SHOW: "/show"
+};

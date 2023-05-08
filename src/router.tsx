@@ -4,6 +4,7 @@ import SearchPage from "./pages/search";
 import ShowPage from "./pages/show";
 import ErrorPage from "./pages/error";
 import RootPage from "./pages";
+import { ROUTES } from "./constants";
 
 export const pagesRouter = createBrowserRouter([
   {
@@ -16,11 +17,11 @@ export const pagesRouter = createBrowserRouter([
     element: <RootPage />,
     children: [
       {
-        path: "search",
+        path: ROUTES.SEARCH,
         element: <SearchPage />
       },
       {
-        path: "show/:nasaId",
+        path: `${ROUTES.SHOW}/:nasaId`,
         element: <ShowPage />
       }
     ],
