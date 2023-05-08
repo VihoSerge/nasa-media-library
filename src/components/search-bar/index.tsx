@@ -1,4 +1,4 @@
-import { buildUrlParams, getUrlParams } from "@/utils/url";
+import { buildUrlParams, filterParams, getUrlParams, URL_KEYS_FILTER } from "@/utils/url";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/button/button";
@@ -25,13 +25,13 @@ export default function SearchBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const urlParams = getUrlParams(location.search) as unknown as SearchAPIParams;
+    const filterdParams = filterParams<SearchAPIParams>(getUrlParams(location.search), URL_KEYS_FILTER);
 
     setSearchValues((prev) => ({
       ...prev,
-      text: urlParams.q,
-      ...(urlParams.year_start && { yearStart: new Date(urlParams.year_start) }),
-      ...(urlParams.year_end && { yearEnd: new Date(urlParams.year_end) })
+      text: filterdParams.q,
+      ...(filterdParams.year_start && { yearStart: new Date(filterdParams.year_start) }),
+      ...(filterdParams.year_end && { yearEnd: new Date(filterdParams.year_end) })
     }));
   }, [location]);
 

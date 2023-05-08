@@ -6,13 +6,14 @@ import SearchBar from "@/components/search-bar";
 import SearchResult from "@/components/search-result";
 import Button from "@/components/ui/button/button";
 import { SearchAPIParams } from "@/types/nasa";
-import { getUrlParams } from "@/utils/url";
+import { filterParams, getUrlParams, URL_KEYS_FILTER } from "@/utils/url";
 import { useLocation } from "react-router-dom";
 
 export default function SearchPage() {
   const { search } = useLocation();
+
   const { data, isLoading, error, hasNextPage, isFetchingNextPage, fetchNextPage } = useSearch(
-    getUrlParams(search) as unknown as SearchAPIParams
+    filterParams<SearchAPIParams>(getUrlParams(search), URL_KEYS_FILTER)
   );
 
   const handleLoadMore = () => {
