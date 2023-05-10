@@ -26,7 +26,7 @@ export const filterParams = <T>(filter: Record<string, any>, mathching: Record<s
       const newValue = mathching[key]?.transform ? mathching[key].transform(value) : value;
 
       if (newValue) {
-        return { ...prev, [mathching[key].key]: newValue };
+        prev[mathching[key].key] = newValue;
       }
     }
     return prev;
